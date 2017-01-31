@@ -1,0 +1,12 @@
+{
+  "name": "keys",
+  "version": "1.0.0",
+  "description": "Flexible event system for key response",
+  "license": "MIT",
+  "author": "Brandon Semilla <semibran@gmail.com>",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/semibran/keys.git"
+  },
+}
