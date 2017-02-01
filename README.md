@@ -1,7 +1,15 @@
 # keys
 > Flexible event system for key response
 
+## Installation
+```sh
+npm install --save semibran/keys
+```
+
 ## Usage
+```javascript
+const Keys = require('keys')
+```
 
 ### Factory
 ```javascript
