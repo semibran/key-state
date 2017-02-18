@@ -1,101 +1,61 @@
-module.exports = function Keys(element) {
+module.exports = function Keys(element, dispatch) {
 
-  if (!element)
-    element = window
+	var keys = {}
+	var updating = false
 
-  const events = ['press', 'tap', 'hold', 'release']
+	element.addEventListener('keydown', function (evt) {
+		var key = getKey(evt)
+		var evt = getEvent('press')
+		if (!key.pressed) {
+			key.pressed = true
+			key.time = 1
+		}
+		if (dispatch)
+			dispatch(key, evt)
+		if (!updating) {
+			updating = true
+			requestAnimationFrame(update)
+		}
+	})
 
-  var data = {}
-  var listening = false
 
-  return { data, on, emit }
+	element.addEventListener('keyup', function (evt) {
+		var key = getKey(evt)
+		var evt = getEvent('release')
+		if (key.pressed) {
+			key.pressed = false
+			key.released = true
+		}
+		if (dispatch)
+			dispatch(key, evt)
+		key.time = 0
+		if (!updating) {
+			updating = true
+			requestAnimationFrame(update)
+		}
+	})
 
-  function on(...types) {
-    return (...keys) => (callback) => {
-      if (!listening)
-        listen()
-      for (var name of keys) {
-        var key = data[name]
-        if (!key)
-          key = data[name] = createKey(name)
-        for (var type of types) {
-          var callbacks = key.listeners[type]
-          if (!callbacks.includes(callback))
-            callbacks.push(callback)
-        }
-      }
-      return on
-    }
-  }
+	return keys
 
-  function emit(type, key) {
-    if (key in data)
-      key = data[key]
-    var callbacks = key.listeners[type]
-    if (callbacks.length) {
-      var event = { type, target: element, timestamp: Date.now() }
-      for (var callback of callbacks)
-        callback(key, event)
-    }
-    return emit
-  }
+	function update() {
+		for (var name in keys) {
+			var key = keys[name]
+			if (key.pressed)
+				key.time++
+			key.released = false
+		}
+		requestAnimationFrame(update)
+	}
 
-  function listen() {
-    listening = true
-    element.addEventListener('keydown', onKey)
-    element.addEventListener('keyup',   onKey)
-    update()
-  }
+	function getKey(evt) {
+		var name = evt.code
+		var key = keys[name]
+		if (!key)
+			key = keys[name] = { name, char: evt.key, code: evt.keyCode, time: 0 }
+		return key
+	}
 
-  function update() {
-    for (var name in data) {
-      var key = data[name]
-      if (key.time) {
-        emit('hold', key)
-        key.time++
-      }
-    }
-    window.requestAnimationFrame(update)
-  }
-
-  function onKey(event) {
-    var name = event.code
-    var key = data[name]
-    if (!key)
-      return
-    if (!key.char)
-      key.char = event.key
-    if (!key.code)
-      key.code = event.keyCode
-    switch (event.type) {
-      case 'keydown':
-        return onKeyDown(key)
-      case 'keyup':
-        return onKeyUp(key)
-    }
-  }
-
-  function onKeyDown(key) {
-    if (!key.down) {
-      key.down = true
-      key.time++
-      emit('tap', key)
-    }
-    emit('press', key)
-  }
-
-  function onKeyUp(key) {
-    if (!key.down)
-      return
-    key.down = false
-    emit('release', key)
-    key.time = 0
-  }
-
-  function createKey(name) {
-    var listeners = {}
-    for (var event of events)
-      listeners[event] = []
-    return { listeners, down: false, time: 0, name }
-  }
+	function getEvent(type) {
+		return { type, target: element, timestamp: Date.now() }
+	}
 }

@@ -1,7 +1,7 @@
 {
   "name": "keys",
-  "version": "1.0.0",
-  "description": "Flexible event system for key response",
+  "version": "2.0.0",
+  "description": "Flexible dispatcher system for key response",
   "license": "MIT",
   "author": "Brandon Semilla <semibran@gmail.com>",
   "main": "index.js",
