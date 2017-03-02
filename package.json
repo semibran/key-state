@@ -1,6 +1,6 @@
 {
   "name": "keys",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Small boilerplate for key input in the browser",
   "license": "MIT",
   "author": "Brandon Semilla <semibran@gmail.com>",

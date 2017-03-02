@@ -1,10 +1,10 @@
 module.exports = function Keys(element) {
 
 	var keys = {}
+	var updating = false
 
-	element.addEventListener('keydown', onKeyDown)
-	element.addEventListener('keyup', onKeyUp)
-	update()
+	element.addEventListener('keydown', onKey)
+	element.addEventListener('keyup', onKey)
 
 	return keys
 
@@ -15,12 +15,16 @@ module.exports = function Keys(element) {
 				keys[name]++
 	}
 
-	function onKeyDown(event) {
-		if (!keys[event.code])
-			keys[event.code] = 1
-	}
-
-	function onKeyUp(event) {
-		keys[event.code] = 0
+	function onKey(event) {
+		var name = event.code
+		if (event.type === 'keydown') {
+			if (!keys[name])
+				keys[name] = 1
+		} else
+			keys[name] = 0
+		if (!updating) {
+			updating = true
+			update()
+		}
 	}
 }
