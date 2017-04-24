@@ -1,49 +1,59 @@
 # keys
-> Small boilerplate for key input in the browser
+> Key input in the browser made simple
 
-## Installation
-```sh
-npm install semibran/keys
-```
-
-## Usage
+## usage
 ```javascript
-var keys = Keys(element) // -> Keys instance
-```
-Use the factory exported by this module to create a new `Keys` instance. Once it is called, it will immediately begin listening for key events. All of these events are scoped down to `element`, meaning that they will only be triggered when the element is in focus.
+var keys = require('keys')(window)
 
-A `Keys` instance is an object that maps browser-defined key codes (e.g. `Space`, `ArrowUp`, `KeyP`) to the amount of frames the key in question has been pressed. In case the requested key is not pressed, it will either be `undefined` if it has not been pressed before or `0` otherwise.
-
-Therefore, you can check if a key is pressed with a simple if-statement detecting if the desired key's value is truthy.
-```javascript
-if (keys.ArrowLeft)
-	hero.move(...LEFT)
-```
-
-To detect if a key has been "tapped", check if the value is equal to `1`:
-```javascript
-if (keys.KeyP === 1)
-	game.pause()
-```
-
-In order to detect a key release, you may want to store the previous key state in a variable. Bare-bones (incomplete) example:
-```javascript
-// Previous key state goes in here
-var keysLast = {}
-
-function update() {
-	// Call this function again after one frame
-	requestAnimationFrame(update)
-
-	// If the spacebar was held for two seconds:
-	if (!keys.Space && keysLast.Space > 120)
-		hero.shootGiantWaveOfDestruction()
-
-	// Save the current key state
-	Object.assign(keysLast, keys)
-
+function input (keys) {
+  if (keys.ArrowLeft) {
+    move(hero, 'left')
+  }
+  if (keys.ArrowRight) {
+    move(hero, 'right')
+  }
 }
 ```
 
-## License
+### installing `keys`
+```sh
+npm install semibran/keys#v1.0.0
+```
+Use of release tags is recommended for stability purposes.
+
+### listening for events
+```javascript
+var keys = Keys(element)
+```
+Once `Keys` is called, it will begin listening on the provided `element` for key events. Usually, the desired element will be the global `window` in order to catch all key events regardless of element focus.
+
+`keys` is an object which maps browser-defined key codes (e.g. `Space`, `ArrowUp`, `KeyP`) to the amount of frames the key in question has been held down. If the key hasn't been pressed since `Keys` was called, it will show up as `undefined`.
+
+The `keys` object will be populated as key events are received.
+
+### using the `keys` object
+
+You can check if a key is currently being pressed by determining if the desired key's value is truthy, i.e. greater than `0`.
+```javascript
+if (keys.ArrowLeft) {
+  move(hero, 'left')
+}
+```
+
+For simplicity, detecting a key release is slightly more complicated - you could listen for `keyup` events independently, or you could store the previous key state in a variable.
+```javascript
+var keysPrev = {}
+function loop () {
+  // If the spacebar is not pressed but it was pressed during the previous frame:
+  if (!keys.Space && keysPrev.Space) {
+    // The spacebar has just been released, do stuff
+  }
+  // Store the current key state
+  Object.assign(keysPrev, keys)
+  // Call this function again after one frame
+  requestAnimationFrame(loop)
+}
+```
+
+## license
 MIT
