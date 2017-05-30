@@ -9,7 +9,7 @@ function loop() {
   if (keys.ArrowRight) {
     move(hero, 'right')
   }
-	requestAnimationFrame(loop)
+  requestAnimationFrame(loop)
 }
 ```
 
@@ -28,7 +28,7 @@ Since a key that isn't being pressed gets mapped to either `0` or `undefined`, y
 
 ```js
 if (keys.Space) {
-	// The spacebar is being pressed. Wow
+  // The spacebar is being pressed. Wow
 }
 ```
 
