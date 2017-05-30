@@ -1,10 +1,16 @@
 {
   "name": "keys",
-  "version": "1.0.0",
-  "description": "Key input in the browser made simple",
+  "version": "0.1.0",
+  "description": "Simple keyboard state tracker",
+  "keywords": [
+		"keys",
+		"keyboard",
+		"input",
+		"browser"
+	],
+  "main": "index.js",
   "license": "MIT",
-  "author": "Brandon Semilla <semibran@gmail.com>",
-  "main": "lib",
+  "author": "Brandon Semilla (https://github.com/semibran)",
   "repository": {
     "type": "git",
     "url": "https://github.com/semibran/keys.git"
