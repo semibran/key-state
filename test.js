@@ -1,4 +1,4 @@
-const keys = require('../')(window)
+const keys = require('./')(window)
 
 loop()
 
