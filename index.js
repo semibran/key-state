@@ -9,7 +9,7 @@ module.exports = function listen(element, keymap) {
 
   function input(event) {
     var key = event.key
-    var name = keymap ? keymap[key] : key
+    var name = keymap && keymap[key] || key
     if (event.type === "keydown") {
       if (!keys[name]) {
         keys[name] = 1
