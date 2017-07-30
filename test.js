@@ -1,4 +1,9 @@
-const keys = require('./')(window)
+const keys = require('./')(window, {
+  ArrowLeft: "left",
+  ArrowUp: "up",
+  ArrowRight: "right",
+  ArrowDown: "down"
+})
 
 loop()
 
