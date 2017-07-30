@@ -13,11 +13,13 @@ function loop() {
 }
 ```
 
+This package is a small wrapper over `KeyboardEvent` which provides a flexible and intuitive interface for tracking DOM keyboard state.
+
 ## usage
 [![NPM](https://nodei.co/npm/key-state.png?mini)](https://www.npmjs.com/package/key-state)
 
 ### `listen(element, keymap?)`
-To begin listening for events, call the function exported by this module (`listen`) with the `element` that you'd like to scope down key events to (usually `window`), like so:
+To begin listening for key events, call the function exported by this module (`listen`) with the `element` that you'd like to scope down key events to (usually `window`), like so:
 
 ```js
 const listen = require("key-state")
