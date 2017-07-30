@@ -13,7 +13,7 @@ function loop() {
 }
 ```
 
-This package is a small wrapper over `KeyboardEvent` which provides a flexible and intuitive interface for tracking DOM keyboard state.
+This package is a thin wrapper over `KeyboardEvent` which provides a flexible and intuitive interface for tracking DOM keyboard state.
 
 ## usage
 [![NPM](https://nodei.co/npm/key-state.png?mini)](https://www.npmjs.com/package/key-state)
