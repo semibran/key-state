@@ -1,33 +1,30 @@
-# keyboard-state
+# key-state
 > Simple keyboard state tracker
 
 ```js
 function loop() {
   if (keys.ArrowLeft) {
-    move(hero, 'left')
+    move(hero, "left")
   }
   if (keys.ArrowRight) {
-    move(hero, 'right')
+    move(hero, "right")
   }
   requestAnimationFrame(loop)
 }
 ```
 
-## install
-```sh
-npm install keyboard-state
-```
-
 ## usage
-To begin listening for events, call the function exported by this module (`listen`) with the `element` that you'd like to scope down key events to (usually `window`).
+[![NPM](https://nodei.co/npm/key-state.png?mini)](https://www.npmjs.com/package/key-state)
 
-```javascript
-const listen = require('keyboard-state')
+### `listen(element, keymap?)`
+To begin listening for events, call the function exported by this module (`listen`) with the `element` that you'd like to scope down key events to (usually `window`), like so:
 
+```js
+const listen = require("key-state")
 var keys = listen(window)
 ```
 
-`listen` returns the keyboard state (`keys`) in the form of an object which maps browser-defined key names as defined by `event.key` (`Enter`, `ArrowUp`, `p`...) to the amount of frames the key in question has been held down.
+`listen` returns the keyboard state (`keys`) in the form of an object which maps [browser-defined key names](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values) as provided by `event.key` to the amount of frames the key in question has been held down.
 
 The `keys` map is populated and updated automatically as key events are received. If a key hasn't been pressed since the map was created, it will evaluate to `undefined`.
 
@@ -39,7 +36,28 @@ if (keys.Enter) {
 }
 ```
 
-If you'd prefer to use names other than the browser-defined key names, consider using [`object-rename`](https://github.com/semibran/object-rename) to switch them out for something else.
+If you'd prefer to use your own custom key names, pass a `keymap` into `listen`:
+
+```js
+const keys = require("key-state")(window, {
+  ArrowLeft: "left",
+  ArrowRight: "right"
+})
+```
+
+Then, access the key times using the names you specified.
+
+```js
+function loop() {
+  if (keys.left) {
+    move(hero, "left")
+  }
+  if (keys.right) {
+    move(hero, "right")
+  }
+  requestAnimationFrame(loop)
+}
+```
 
 ## license
 [MIT](https://opensource.org/licenses/MIT) © [Brandon Semilla](https://git.io/semibran)
