@@ -1,4 +1,4 @@
-module.exports = function listen(element) {
+module.exports = function listen(element, keymap) {
 	var keys = {}
 	var updating = false
 
@@ -8,7 +8,8 @@ module.exports = function listen(element) {
 	return keys
 
 	function input(event) {
-		var name = event.key
+    var key = event.key
+		var name = keymap ? keymap[key] : key
 		if (event.type === 'keydown') {
 			if (!keys[name]) {
 				keys[name] = 1
