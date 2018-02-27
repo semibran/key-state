@@ -1,12 +1,12 @@
 # key-state
-> Simple keyboard state tracker
+> Simple DOM keyboard state tracker
 
 ```js
 function loop() {
-  if (keys.ArrowLeft) {
+  if (keys.left) {
     move(hero, "left")
   }
-  if (keys.ArrowRight) {
+  if (keys.right) {
     move(hero, "right")
   }
   requestAnimationFrame(loop)
@@ -16,17 +16,17 @@ function loop() {
 This package is a thin wrapper over `KeyboardEvent` which provides a flexible and intuitive interface for tracking DOM keyboard state.
 
 ## usage
-[![NPM](https://nodei.co/npm/key-state.png?mini)](https://www.npmjs.com/package/key-state)
+[![npm](npm badge)](npm package "view npm package")
 
 ### `listen(element, keymap?)`
-To begin listening for key events, call the function exported by this module (`listen`) with the `element` that you'd like to scope down key events to (usually `window`), like so:
+To begin listening for key events, call the function exported by this module (`listen`) while passing in the `element` that you'd like to scope down key events to (usually `window`), like so:
 
 ```js
 const listen = require("key-state")
 var keys = listen(window)
 ```
 
-`listen` returns the keyboard state (`keys`) in the form of an object which maps [browser-defined key names](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values) as provided by `event.key` to the amount of frames the key in question has been held down.
+`listen` returns the keyboard state (`keys`, for **key**board **s**tate) in the form of an object which maps [browser-defined key names] as provided by `event.key` to the amount of frames the key in question has been held down.
 
 The `keys` map is populated and updated automatically as key events are received. If a key hasn't been pressed since the map was created, it will evaluate to `undefined`.
 
@@ -38,16 +38,16 @@ if (keys.Enter) {
 }
 ```
 
-If you'd prefer to use your own custom key names, pass a `keymap` into `listen`:
+If you'd prefer to use your own custom key names, pass a `keymap` into `listen` with the following `name -> [ keys ]` structure:
 
 ```js
 const keys = require("key-state")(window, {
-  ArrowLeft: "left",
-  ArrowRight: "right"
+  left: [ "ArrowLeft", "KeyA" ],
+  right: [ "ArrowRight", "KeyD" ]
 })
 ```
 
-Then, access the key times using the names you specified.
+Then, just access the key times using the names you specified. Feeding multiple keys into the keymap's corresponding key list will prompt the listener to treat lump all of those keys under a single name.
 
 ```js
 function loop() {
@@ -62,4 +62,9 @@ function loop() {
 ```
 
 ## license
-[MIT](https://opensource.org/licenses/MIT) © [Brandon Semilla](https://git.io/semibran)
+MIT © [Brandon Semilla](github profile)
+
+[npm badge]: https://nodei.co/npm/key-state.png?mini
+[npm package]: https://www.npmjs.com/package/key-state
+[github profile]: https://github.com/semibran
+[browser-defined key names]: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values

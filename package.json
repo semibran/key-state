@@ -1,10 +1,19 @@
 {
- "name": "key-state",
- "version": "0.0.0",
- "description": "Simple keyboard state tracker",
- "keywords": ["key", "state", "keyboard", "listen", "event", "input"],
- "files": ["index.js"],
- "license": "MIT",
- "author": "Brandon Semilla (https://github.com/semibran)",
- "repository": "semibran/key-state"
+  "name": "key-state",
+  "version": "1.0.0",
+  "description": "Simple DOM keyboard state tracker",
+  "repository": "semibran/key-state",
+  "author": "semibran",
+  "license": "MIT",
+  "main": "lib",
+  "keywords": [
+    "html",
+    "keyboard",
+    "input",
+    "event",
+    "listener"
+  ],
+  "devDependencies": {
+    "budo": "^11.1.7"
+  }
 }
