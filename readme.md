@@ -68,5 +68,6 @@ MIT © [Brandon Semilla][github profile]
 
 [npm badge]: https://nodei.co/npm/key-state.png?mini
 [npm package]: https://www.npmjs.com/package/key-state
+[rollup]: https://github.com/rollup/rollup
+[rollup-plugin-node-resolve]: https://github.com/rollup/rollup-plugin-node-resolve
 [github profile]: https://github.com/semibran
-[browser-defined key names]: https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values
