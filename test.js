@@ -1,4 +1,4 @@
-const keys = require("./lib")(window, {
+const keys = require("./lib/key-state")(window, {
   left:  [ "ArrowLeft",  "KeyA" ],
   right: [ "ArrowRight", "KeyD" ],
   up:    [ "ArrowUp",    "KeyW" ],
