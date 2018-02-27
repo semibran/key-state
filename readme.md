@@ -26,11 +26,9 @@ const listen = require("key-state")
 var keys = listen(window)
 ```
 
-`listen` returns the keyboard state (`keys`, for **key**board **s**tate) in the form of an object which maps [browser-defined key names] as provided by `event.key` to the amount of frames the key in question has been held down.
+`listen` returns the keyboard state (`keys`, for **key**board **s**tate) in the form of an object which maps browser-defined key names as provided by `event.code` to the amount of frames the key in question has been held down. For example, after holding down the spacebar for half a second, `keys.Space` would yield `30` at 60 frames per second.
 
-The `keys` map is populated and updated automatically as key events are received. If a key hasn't been pressed since the map was created, it will evaluate to `undefined`.
-
-Since a key that isn't being pressed gets mapped to either `0` or `undefined`, you can check if a key _is_ being pressed by determining if its value is truthy.
+The `keys` map is populated and updated automatically as key events are received. If a key hasn't been pressed since the map was created, it will evaluate to `undefined`. This feature implies that any key that isn't being pressed will be mapped to either `0` or `undefined`, meaning you can check if a key _is_ being pressed by determining if its value is truthy.
 
 ```js
 if (keys.Enter) {
@@ -38,7 +36,7 @@ if (keys.Enter) {
 }
 ```
 
-If you'd prefer to use your own custom key names, pass a `keymap` into `listen` with the following `name -> [ keys ]` structure:
+If you'd prefer to use your own custom key names for flexibility, pass a `keymap` into `listen` with the following `name -> [ keys ]` structure:
 
 ```js
 const keys = require("key-state")(window, {
@@ -47,7 +45,7 @@ const keys = require("key-state")(window, {
 })
 ```
 
-Then, just access the key times using the names you specified. Feeding multiple keys into the keymap's corresponding key list will prompt the listener to treat lump all of those keys under a single name.
+Then, just access the key times using the names you specified. Feeding multiple keys into the keymap's corresponding key list will prompt the listener to lump all of those keys under a single name.
 
 ```js
 function loop() {
