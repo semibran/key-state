@@ -1,5 +1,5 @@
 # key-state
-> Simple DOM keyboard state tracker
+> simple DOM keyboard state tracker
 
 ```js
 function loop() {
@@ -16,7 +16,7 @@ function loop() {
 This package is a thin wrapper over `KeyboardEvent` which provides a flexible and intuitive interface for tracking DOM keyboard state.
 
 ## usage
-[![npm badge]][npm package "view npm package"]
+[![npm badge]][npm package]
 
 ### `listen(element, keymap?)`
 To begin listening for key events, call the function exported by this module (`listen`) while passing in the `element` that you'd like to scope down key events to (usually `window`), like so:

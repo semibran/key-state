@@ -1,7 +1,7 @@
 {
   "name": "key-state",
   "version": "1.0.0",
-  "description": "Simple DOM keyboard state tracker",
+  "description": "simple DOM keyboard state tracker",
   "repository": "semibran/key-state",
   "author": "semibran",
   "license": "MIT",
