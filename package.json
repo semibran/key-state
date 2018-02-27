@@ -1,11 +1,11 @@
 {
   "name": "key-state",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "simple DOM keyboard state tracker",
   "repository": "semibran/key-state",
   "author": "semibran",
   "license": "MIT",
-  "main": "lib",
+  "main": "lib/key-state.js",
   "keywords": [
     "html",
     "keyboard",
