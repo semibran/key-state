@@ -12,8 +12,5 @@
     "input",
     "event",
     "listener"
-  ],
-  "devDependencies": {
-    "budo": "^11.1.7"
-  }
+  ]
 }
