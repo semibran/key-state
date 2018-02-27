@@ -14,16 +14,20 @@ function loop() {
 ```
 
 This package is a thin wrapper over `KeyboardEvent` which provides a flexible and intuitive interface for tracking DOM keyboard state.
+## install
+[![npm badge]][npm package]
+
+To use this module in your project, package your code together using a bundler like [`rollup`][rollup] together with [`rollup-plugin-node-resolve`][rollup-plugin-node-resolve].
 
 ## usage
-[![npm badge]][npm package]
 
 ### `listen(element, keymap?)`
 To begin listening for key events, call the function exported by this module (`listen`) while passing in the `element` that you'd like to scope down key events to (usually `window`), like so:
 
 ```js
-const listen = require("key-state")
-var keys = listen(window)
+import listen from "key-state"
+
+const keys = listen(window)
 ```
 
 `listen` returns the keyboard state (`keys`, for **key**board **s**tate) in the form of an object which maps browser-defined key names as provided by `event.code` to the amount of frames the key in question has been held down. For example, after holding down the spacebar for half a second, `keys.Space` would yield `30` at 60 frames per second.
@@ -39,7 +43,7 @@ if (keys.Enter) {
 If you'd prefer to use your own custom key names for flexibility, pass a `keymap` into `listen` with the following `name -> [ keys ]` structure:
 
 ```js
-const keys = require("key-state")(window, {
+const keys = listen(window, {
   left: [ "ArrowLeft", "KeyA" ],
   right: [ "ArrowRight", "KeyD" ]
 })
