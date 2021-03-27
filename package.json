@@ -5,12 +5,20 @@
   "repository": "semibran/key-state",
   "author": "semibran",
   "license": "MIT",
-  "main": "lib/key-state.js",
+  "main": "dist/key-state.js",
   "keywords": [
     "html",
     "keyboard",
     "input",
     "event",
     "listener"
-  ]
+  ],
+  "scripts": {
+    "prepublishOnly": "babel --out-dir dist lib"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.13.10",
+    "@babel/core": "^7.13.13",
+    "@babel/preset-env": "^7.13.12"
+  }
 }
